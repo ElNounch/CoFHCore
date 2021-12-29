@@ -505,6 +505,7 @@ class ASMCore {
 			m.instructions.insert(n, n = end);
 			m.instructions.insert(n, n = new FrameNode(F_SAME1, 0, null, 0, new Object[] { INTEGER }));
 			m.instructions.insert(n, n = new InsnNode(POP));
+			m.maxStack = Math.max(m.maxStack, 3);
 
 			ClassWriter cw = new ClassWriter(0);
 			cn.accept(cw);
@@ -524,7 +525,7 @@ class ASMCore {
 		mv.visitCode();
 		mv.visitInsn(ICONST_M1);
 		mv.visitInsn(IRETURN);
-		mv.visitMaxs(1, 2);
+		mv.visitMaxs(1, 3);
 		mv.visitEnd();
 		cw.visitEnd();
 		bytes = cw.toByteArray();
